@@ -5,8 +5,8 @@
 ## 📦 O‘rnatish
 
 ```bash
-git clone https://github.com/yourusername/mytunnel-cli.git
-cd mytunnel-cli
+git clone https://github.com/odilov-a/tunnel-service-cli.git
+cd tunnel-service-cli
 npm install
 ```
 
