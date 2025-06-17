@@ -1,0 +1,19 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "chalk": "^5.4.1",
+    "clear": "^0.1.0",
+    "figlet": "^1.8.1",
+    "ora": "^8.2.0",
+    "ws": "^8.18.2",
+    "yargs": "^18.0.0"
+  }
+}
