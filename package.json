@@ -1,12 +1,17 @@
 {
   "name": "mytunnel-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MyTunnel CLI tool to expose your local server via subdomain",
   "bin": {
     "mytunnel": "./index.mjs"
   },
   "type": "module",
-  "keywords": ["tunnel", "cli", "websocket", "reverse-proxy"],
+  "keywords": [
+    "tunnel",
+    "cli",
+    "websocket",
+    "reverse-proxy"
+  ],
   "author": "Akbar Odilov",
   "license": "MIT",
   "dependencies": {
