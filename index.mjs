@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import WebSocket from "ws";
 import axios from "axios";
 import yargs from "yargs";
