@@ -11,6 +11,7 @@ clear();
 console.log(
   chalk.cyan(figlet.textSync("MyTunnel", { horizontalLayout: "full" }))
 );
+
 const spinner = ora("Connecting to tunnel server...").start();
 
 const argv = yargs(hideBin(process.argv))
@@ -36,12 +37,19 @@ const argv = yargs(hideBin(process.argv))
 
 const { subdomain, port, token } = argv;
 
-const ws = new WebSocket("ws://localhost:7000");
+// 🔁 Render deploy URL:
+const WS_SERVER_URL = "wss://tunnel-service-backend.onrender.com";
+
+const ws = new WebSocket(WS_SERVER_URL);
 
 ws.on("open", () => {
-  const publicUrl = `http://localhost:7000/api/tunnels/${subdomain}/`;
+  const publicUrl = `${WS_SERVER_URL.replace(
+    /^wss?:/,
+    "https:"
+  )}/api/tunnels/${subdomain}/`;
   spinner.succeed(chalk.green("Connected to tunnel server"));
   console.log(chalk.yellow(`[🌐] Your public URL:`), chalk.cyan(publicUrl));
+
   ws.send(
     JSON.stringify({
       type: "register",
@@ -67,8 +75,8 @@ ws.on("message", async (msg) => {
       ? url.slice(tunnelPrefix.length)
       : "/";
     if (!cleanPath.startsWith("/")) cleanPath = "/" + cleanPath;
-    const fullUrl = `http://localhost:${port}${cleanPath}`;
 
+    const fullUrl = `http://localhost:${port}${cleanPath}`;
     console.log(chalk.magenta(`[→] Forwarding ${method} ${url} ⟶ ${fullUrl}`));
 
     try {
@@ -109,4 +117,15 @@ ws.on("message", async (msg) => {
       );
     }
   }
+});
+
+ws.on("close", () => {
+  console.log(chalk.red("[✖] WebSocket connection closed."));
+  process.exit(1);
+});
+
+ws.on("error", (err) => {
+  spinner.fail("Failed to connect to tunnel server");
+  console.error(chalk.red(`[WebSocket Error] ${err.message}`));
+  process.exit(1);
 });
