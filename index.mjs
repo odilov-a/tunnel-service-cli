@@ -39,7 +39,6 @@ const argv = yargs(hideBin(process.argv))
 
 const { subdomain, port, token } = argv;
 
-// 🔁 Render deploy URL:
 const WS_SERVER_URL = "wss://tunnel-service-backend.onrender.com";
 
 const ws = new WebSocket(WS_SERVER_URL);
