@@ -1,11 +1,11 @@
 {
   "name": "mytunnel-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MyTunnel CLI tool to expose your local server via subdomain",
+  "type": "module",
   "bin": {
     "mytunnel": "./index.mjs"
   },
-  "type": "module",
   "keywords": [
     "tunnel",
     "cli",
